@@ -117,6 +117,20 @@ function toggleTheme() {
 }
 
 browser.browserAction.onClicked.addListener(toggleTheme);
+const darkScheme = matchMedia('(prefers-color-scheme: dark)')
+darkScheme.addEventListener('change', function () {
+  if (darkScheme.matches) {
+    updateTheme('dark')
+  } else {
+    updateTheme('light')
+  }
+})
+
+if (darkScheme.matches) {
+  updateTheme('dark')
+} else {
+  updateTheme('light')
+}
 
 const setting = browser.storage.local.get();
 setting.then(onGot);
